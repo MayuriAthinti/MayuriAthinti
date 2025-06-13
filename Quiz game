@@ -1,0 +1,55 @@
+import random
+
+def ask_question(question, options, answer):
+    print(f"\n{question}")
+    for i, option in enumerate(options, 1):
+        print(f"{i}. {option}")
+    user_input = input("Your answer (choose the option number): ")
+    try:
+        user_choice = int(user_input)
+        if options[user_choice - 1] == answer:
+            print("Correct!\n")
+            return True
+        else:
+            print(f"Incorrect. The correct answer is: {answer}\n")
+            return False
+    except (ValueError, IndexError):
+        print("Invalid input. Please enter a valid option number.\n")
+        return False
+
+def quiz_game():
+    questions = [
+        {
+            "question": "What is the capital of France?",
+            "options": ["Paris", "London", "Rome", "Berlin"],
+            "answer": "Paris"
+        },
+        {
+            "question": "Who wrote 'Hamlet'?",
+            "options": ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+            "answer": "William Shakespeare"
+        },
+        {
+            "question": "What is the largest planet in our solar system?",
+            "options": ["Earth", "Jupiter", "Saturn", "Mars"],
+            "answer": "Jupiter"
+        },
+        {
+            "question": "Which element has the chemical symbol 'O'?",
+            "options": ["Gold", "Oxygen", "Osmium", "Iron"],
+            "answer": "Oxygen"
+        }
+    ]
+
+    random.shuffle(questions)
+    score = 0
+
+    print("Welcome to the Quiz Game!")
+    for q in questions:
+        if ask_question(q["question"], q["options"], q["answer"]):
+            score += 1
+
+    print(f"Quiz finished! Your score is: {score}/{len(questions)}")
+
+if __name__ == "__main__":
+    quiz_game()
